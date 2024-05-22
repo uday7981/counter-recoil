@@ -5,7 +5,7 @@ import { Button, Card, Typography } from '@mui/material'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <div
@@ -24,7 +24,7 @@ function App() {
 
         <br />
         <Buttons count={count} setCount={setCount} />
-        {/* <CounterComponent /> */}
+        <CounterComponent count={count} setCount={setCount} />
       </Card>
     </div >
 
@@ -48,7 +48,7 @@ function Buttons({ count, setCount }) {
 }
 
 
-function Increase(count, setCount) {
+function Increase({ count, setCount }) {
 
   return <div>
     <Button variant='contained' onClick={() => {
@@ -60,7 +60,7 @@ function Increase(count, setCount) {
 }
 
 
-function Decrease(count, setCount) {
+function Decrease({ count, setCount }) {
   return <div>
     <Button variant='contained' onClick={() => {
       setCount(count - 1)
@@ -71,9 +71,12 @@ function Decrease(count, setCount) {
 }
 
 
-function CounterComponent() {
+function CounterComponent({ count }) {
 
   return <div>
+    <Typography variant='h5' textAlign={"center"}>
+      {count}
+    </Typography>
 
   </div>
 
