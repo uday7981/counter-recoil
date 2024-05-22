@@ -23,7 +23,7 @@ function App() {
 
 
         <br />
-        <Buttons />
+        <Buttons count={count} setCount={setCount} />
         {/* <CounterComponent /> */}
       </Card>
     </div >
@@ -72,6 +72,10 @@ function Decrease(count, setCount) {
 
 
 function CounterComponent() {
+
+  return <div>
+
+  </div>
 
 
 }
