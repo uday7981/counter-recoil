@@ -1,17 +1,22 @@
-import { createContext, useContext, useState } from 'react'
+import { useState } from 'react'
 import { Button, Card, Typography } from '@mui/material'
+import {
+  RecoilRoot,
+  atom,
+
+  useRecoilState,
+  useRecoilValue,
+} from 'recoil';
 
 
 
-const CountContext = createContext();
+
+
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <CountContext.Provider value={{
-      count: count,
-      setCount: setCount
-    }}>
+    <RecoilRoot>
       <div
         style={{
           display: "flex",
@@ -31,7 +36,7 @@ function App() {
           <CounterComponent />
         </Card>
       </div >
-    </CountContext.Provider>
+    </RecoilRoot>
 
 
   )
@@ -54,11 +59,10 @@ function Buttons() {
 
 
 function Increase() {
-  const { count, setCount } = useContext(CountContext)
-
+  const [count, setCount] = useRecoilState(countState);
   return <div>
     <Button variant='contained' onClick={() => {
-      setCount(count + 1)
+      setCount(existingCount => existingCount + 1)
     }}>Increase Counter</Button>
 
   </div>
@@ -67,10 +71,10 @@ function Increase() {
 
 
 function Decrease() {
-  const { count, setCount } = useContext(CountContext)
+  const [count, setCount] = useRecoilState(countState);
   return <div>
     <Button variant='contained' onClick={() => {
-      setCount(count - 1)
+      setCount(existingCount => existingCount - 1)
     }}>Decrease Counter</Button>
   </div>
 
@@ -80,7 +84,7 @@ function Decrease() {
 
 function CounterComponent() {
 
-  const { count } = useContext(CountContext)
+  const count = useRecoilValue(countState);
   return <div>
     <Typography variant='h5' textAlign={"center"}>
       {count}
@@ -90,4 +94,9 @@ function CounterComponent() {
 
 
 }
+
+const countState = atom({
+  key: 'countState',
+  default: 0,
+});
 export default App
